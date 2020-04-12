@@ -30,7 +30,7 @@ CREATE TABLE `classement` (
   PRIMARY KEY (`idclassement`),
   KEY `Equipe_idEquipe_idx` (`Equipe_idEquipe`),
   CONSTRAINT `idEquipe` FOREIGN KEY (`Equipe_idEquipe`) REFERENCES `equipe` (`idEquipe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,7 +56,7 @@ CREATE TABLE `equipe` (
   `nbParticipation` int DEFAULT NULL,
   `nbVictoire` int DEFAULT NULL,
   PRIMARY KEY (`idEquipe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `joueur` (
   PRIMARY KEY (`idjoueur`),
   KEY `equipe_idEquipe_idx` (`Equipe_idEquipe`),
   CONSTRAINT `Equipe_idEquipe` FOREIGN KEY (`Equipe_idEquipe`) REFERENCES `equipe` (`idEquipe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `joueur_match` (
   KEY `Match_idMatch_idx` (`Match_idMatch`),
   CONSTRAINT `Joueur_idJoueur` FOREIGN KEY (`joueur_idJoueur`) REFERENCES `joueur` (`idjoueur`),
   CONSTRAINT `Match_idMatch` FOREIGN KEY (`Match_idMatch`) REFERENCES `matchinfo` (`idmatch`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `login` (
   `login` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idadmin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `matchinfo` (
   KEY `Equipe_idEquipie2_idx` (`Equipe_idEquipe2`),
   CONSTRAINT `Equipe_idEquipe1` FOREIGN KEY (`Equipe_idEquipe1`) REFERENCES `equipe` (`idEquipe`),
   CONSTRAINT `Equipe_idEquipie2` FOREIGN KEY (`Equipe_idEquipe2`) REFERENCES `equipe` (`idEquipe`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
