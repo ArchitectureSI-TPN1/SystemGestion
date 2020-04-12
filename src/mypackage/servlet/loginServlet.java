@@ -1,6 +1,8 @@
 package mypackage.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,19 +29,20 @@ public class loginServlet extends HttpServlet {
 		 request.setCharacterEncoding("utf-8");
 		 String name = request.getParameter("login");
 		 String pwd = request.getParameter("password");
-		 System.out.println(pwd);
 		 Login login = new Login(name, pwd);
-		 
-		 int result = LoginDao.login(login);
+		 LoginDao loginDao = new LoginDao();
+		 int result = loginDao.login(login);
 		 if(result > 0 ) {
-			 response.sendRedirect("welcome.jsp"); 
+			 //response.sendRedirect("view/welcome.jsp"); 
+			 request.getRequestDispatcher("view/welcome.jsp").forward(request,response);
 		 }else {
-			 response.sendRedirect("404.jsp");
+			 request.getRequestDispatcher("view/404.jsp").forward(request,response);
+			 //response.sendRedirect("view/404.jsp");
 		 }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 
 }
