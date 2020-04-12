@@ -29,4 +29,24 @@
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>equipeServlet</display-name>
+    <servlet-name>equipeServlet</servlet-name>
+    <servlet-class>mypackage.servlet.equipeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>equipeServlet</servlet-name>
+    <url-pattern>/equipeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SystemServlet</display-name>
+    <servlet-name>SystemServlet</servlet-name>
+    <servlet-class>mypackage.servlet.SystemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SystemServlet</servlet-name>
+    <url-pattern>/SystemServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
