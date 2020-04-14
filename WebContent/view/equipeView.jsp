@@ -15,6 +15,17 @@
 <% String message = (String) request.getAttribute("message");%>
 <% String showAdd = (String) request.getAttribute("showAdd");%>
 <% Equipe equipeEdit = (Equipe) request.getAttribute("equipeEdit"); %>
+<% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
+<% boolean admin = false;
+	Cookie[]  cookies = httpRequest.getCookies();
+   if(cookies != null){
+	   for(Cookie ck : cookies){
+		   if("admin".equals(ck.getValue())){
+			   admin = true;
+		   }
+	   }
+   }
+%>
 <h2 align = "center">equipe</h2>  
     <table border = 1px align = "center">  
     <% if("showAdd".equals(showAdd)){%>
@@ -94,23 +105,26 @@
             <th>nom</th>  
             <th>nbPAR</th>  
             <th>nbvic</th>  
-        </tr>  
+        </tr> 
+    	<% if(admin){%>
         <form action = "equipeServlet">
         <input type = "submit" name = "button" value = "delete">
 		<input type = "submit" name = "button" value = "add"> 
         <input type = "submit" name = "button" value = "edit">
+        <%} %>
         <%  if(list != null){%>
         <% for(int i = 0;i<list.size();i++){%>
                 <%Equipe equipe = (Equipe)list.get(i);%> 
                 <tr>
+                
                 <th><input type = checkbox name = "chk" id="chk" value=<%=equipe.getIdEquipe()%>></th> 
+                
                 <th><%=equipe.getIdEquipe() %></th>  
                 <th><%=equipe.getNomEquipe()%></th>  
                 <th><%=equipe. getNbParticipation()%></th>  
                 <th><%=equipe.getNbVictore()%></th><br>   
                 
-        <% }  
-         %> 
+        <% }%> 
         <% }%>
         </form>
         <% if(equipeInfo != null){%>

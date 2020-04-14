@@ -49,4 +49,14 @@
     <servlet-name>SystemServlet</servlet-name>
     <url-pattern>/SystemServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>roleServlet</display-name>
+    <servlet-name>roleServlet</servlet-name>
+    <servlet-class>mypackage.servlet.roleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>roleServlet</servlet-name>
+    <url-pattern>/roleServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
