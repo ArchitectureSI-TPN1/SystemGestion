@@ -59,4 +59,24 @@
     <servlet-name>roleServlet</servlet-name>
     <url-pattern>/roleServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>joueur</display-name>
+    <servlet-name>joueur</servlet-name>
+    <servlet-class>mypackage.servlet.joueur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>joueur</servlet-name>
+    <url-pattern>/joueur</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>joueurServlet</display-name>
+    <servlet-name>joueurServlet</servlet-name>
+    <servlet-class>mypackage.servlet.joueurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>joueurServlet</servlet-name>
+    <url-pattern>/joueurServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

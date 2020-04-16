@@ -62,7 +62,7 @@
 	<% }%>
 	
 	<% if(equipeEdit != null){%>
-	<div id="addDialog" style="padding: 10px"> 
+	<div id="editDialog" style="padding: 10px"> 
 	<form action = "equipeServlet">
 	    	<table cellpadding="8" >
 	    		<tr>

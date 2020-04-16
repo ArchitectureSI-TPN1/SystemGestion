@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import mypackage.dao.EquipeDao;
 import mypackage.model.Equipe;
+import mypackage.dao.JoueurDao;
+import mypackage.model.Joueur;
 
 /**
  * Servlet implementation class SystemServlet
@@ -37,6 +39,9 @@ public class SystemServlet extends HttpServlet {
 			request.setAttribute("equipes", equipes);
 			request.getRequestDispatcher("view/equipeView.jsp").forward(request,response);
 		}else if("joueur".equals(element)) {
+			JoueurDao joueurDao = new JoueurDao();
+			List<Joueur> joueurs = joueurDao.getJoueurs();
+			request.setAttribute("joueurs", joueurs);
 			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 		}else if("match".equals(element)){
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
