@@ -104,7 +104,8 @@
             <th>id</th>  
             <th>nom</th>  
             <th>nbPAR</th>  
-            <th>nbvic</th>  
+            <th>nbvic</th>
+            <th>classement</th>  
         </tr> 
     	<% if(admin){%>
         <form action = "equipeServlet">
@@ -115,14 +116,13 @@
         <%  if(list != null){%>
         <% for(int i = 0;i<list.size();i++){%>
                 <%Equipe equipe = (Equipe)list.get(i);%> 
-                <tr>
-                
+                <tr>       
                 <th><input type = checkbox name = "chk" id="chk" value=<%=equipe.getIdEquipe()%>></th> 
-                
                 <th><%=equipe.getIdEquipe() %></th>  
                 <th><%=equipe.getNomEquipe()%></th>  
                 <th><%=equipe. getNbParticipation()%></th>  
-                <th><%=equipe.getNbVictore()%></th><br>   
+                <th><%=equipe.getNbVictore()%></th>
+                <th><a href="classementServlet?classement=<%=equipe.getIdEquipe() %>">classement</a></th><br>   
                 
         <% }%> 
         <% }%>

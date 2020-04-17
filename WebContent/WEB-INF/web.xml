@@ -79,4 +79,14 @@
     <servlet-name>joueurServlet</servlet-name>
     <url-pattern>/joueurServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>classementServlet</display-name>
+    <servlet-name>classementServlet</servlet-name>
+    <servlet-class>mypackage.servlet.classementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>classementServlet</servlet-name>
+    <url-pattern>/classementServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
