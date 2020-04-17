@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import mypackage.dao.EquipeDao;
 import mypackage.model.Equipe;
 import mypackage.dao.JoueurDao;
+import mypackage.dao.MatchDao;
 import mypackage.model.Joueur;
+import mypackage.model.Match;
 
 /**
  * Servlet implementation class SystemServlet
@@ -44,7 +46,10 @@ public class SystemServlet extends HttpServlet {
 			request.setAttribute("joueurs", joueurs);
 			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 		}else if("match".equals(element)){
-			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
+			MatchDao matchDao = new MatchDao();
+			List<Match> matchs = matchDao.getMatchs();
+			request.setAttribute("matchs", matchs);
+			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);		
 		}
 	}
 

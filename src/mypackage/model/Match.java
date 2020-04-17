@@ -1,11 +1,11 @@
 package mypackage.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Match {
 	private int idMatch;
 	private String nomMatch;
-	private Date DateTime;
+	private Date Date;
 	private String ville;
 	private String stade;
 	private int idEquipe1;
@@ -24,11 +24,11 @@ public class Match {
 	public void setNomMatch(String nomMatch) {
 		this.nomMatch = nomMatch;
 	}
-	public Date getDateTime() {
-		return DateTime;
+	public Date getDate() {
+		return Date;
 	}
-	public void setDateTime(Date dateTime) {
-		DateTime = dateTime;
+	public void setDate(Date date) {
+		Date = date;
 	}
 	public String getVille() {
 		return ville;
