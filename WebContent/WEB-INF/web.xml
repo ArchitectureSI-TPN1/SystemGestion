@@ -89,4 +89,15 @@
     <servlet-name>classementServlet</servlet-name>
     <url-pattern>/classementServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>matchServlet</display-name>
+    <servlet-name>matchServlet</servlet-name>
+    <servlet-class>mypackage.servlet.matchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>matchServlet</servlet-name>
+    <url-pattern>/matchServlet</url-pattern>
+  </servlet-mapping>
+ 
 </web-app>

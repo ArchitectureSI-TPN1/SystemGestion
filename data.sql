@@ -199,10 +199,10 @@ CREATE TABLE IF NOT EXISTS `matchinfo` (
 --
 
 INSERT INTO `matchinfo` (`idmatch`, `nomMatch`, `date`, `ville`, `stade`, `Equipe_idEquipe1`, `Equipe_idEquipe2`, `pointEquipe1`, `pointEquipe2`) VALUES
-(101, 'regular season', '2019-06-08', 'paris', 'parc des princes', 4, 1, '2', '1'),
-(102, 'regular season', '2019-06-09', 'roma', 'stadio olimpico di roma', 1, 2, '2', '1'),
-(103, 'regular season', '2019-06-12', 'turin', 'juventus stadium', 2, 3, '3', '0'),
-(104, 'regular season', '2019-06-08', 'paris', 'parc des princes', 3, 5, '2', '1'),
+(101, 'regular season1', '2019-06-08', 'paris', 'parc des princes', 4, 1, '2', '1'),
+(102, 'regular season2', '2019-06-09', 'roma', 'stadio olimpico di roma', 1, 2, '2', '1'),
+(103, 'regular season3', '2019-06-12', 'turin', 'juventus stadium', 2, 3, '3', '0'),
+(104, 'regular season4', '2019-06-08', 'paris', 'parc des princes', 3, 5, '2', '1'),
 (105, '1/4 finals', '2019-07-01', 'barcelone', 'camp nou', 5, 4, '5', '3');
 
 --

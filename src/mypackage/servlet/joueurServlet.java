@@ -1,6 +1,8 @@
 package mypackage.servlet;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -93,6 +95,11 @@ public class joueurServlet extends HttpServlet {
 				request.setAttribute("message", "editSuccess");
 				request.getRequestDispatcher("SystemServlet?element=joueur").forward(request,response);
 			}
+		}else if("ListAll".equals(button)) {
+			JoueurDao joueurDao = new JoueurDao();
+			List<Joueur> joueurs = joueurDao.getJoueurs();
+			request.setAttribute("joueurs", joueurs);
+			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 		}
 	}
 

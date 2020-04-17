@@ -14,7 +14,7 @@ Element : <select name="element">
   <option value="joueur">joueur</option>
   <option value="match">match</option>
 </select> <br/>
-<input type="submit" />
+<input type="submit" value = "submit" />
 </form>	
 </body>
 </html>

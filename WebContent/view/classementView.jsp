@@ -23,7 +23,7 @@
 <% for(int i = 0;i<list.size();i++){%>
         <%Classement classement = (Classement)list.get(i);%> 
         <tr>
-        <th><%=classement.getIdEquipe() %></th>
+        <th><%=classement.getIdClassement() %></th>
         <th><%=classement.getIdEquipe() %></th>  
         <th><%=classement.getAnnee()%></th>  
         <th><%=classement.getPosition()%></th><br> 

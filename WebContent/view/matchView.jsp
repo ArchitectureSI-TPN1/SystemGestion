@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="mypackage.model.Match"%>  
+<%@ page import="mypackage.model.Equipe"%> 
+<%@ page import="mypackage.dao.EquipeDao"%>
 <%@ page language="java" import="java.util.List"%>  
 
 <!DOCTYPE html>
@@ -17,17 +19,33 @@
 <% Match matchEdit = (Match) request.getAttribute("matchEdit"); %>
 <% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
 <% boolean admin = false;
+   String login = "";
+   String password = "";
 	Cookie[]  cookies = httpRequest.getCookies();
    if(cookies != null){
 	   for(Cookie ck : cookies){
 		   if("admin".equals(ck.getValue())){
 			   admin = true;
 		   }
+		   if("login".equals(ck.getName())){
+			   login = ck.getValue();
+		   }
+		   if("password".equals(ck.getName())){
+			   password = ck.getValue();
+		   }
 	   }
    }
 %>
+<% if(admin==false){%>
+<a href="roleServlet?role=visiter">return to page choose table</a>
+<% }%>
+<% if(admin==true){ %>
+<% String web = "loginServlet?login=" + login+ "&password=" + password;%>
+<a href="<%= web%>" > return to page choose table </a>
+<% } %>
+
 <h2 align = "center">match</h2>  
-    <table border = 1px align = "center">  
+    <table border = 1px align = "center">
     <% if("showAdd".equals(showAdd)){%>
     <!-- add match windows -->
 	<div id="addDialog" style="padding: 10px">  
@@ -62,13 +80,13 @@
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>idEquipe1</td>
+	    			<td>nomEquipe1</td>
 	    			<td>
 	    				<input id="add_equipe1" style="width: 200px; height: 30px;" type="text" name="equipe1" data-options="required:true, missingMessage:'enter equipe1'" />
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>idEquipe2</td>
+	    			<td>nomEquipe2</td>
 	    			<td>
 	    				<input id="add_equipe2" style="width: 200px; height: 30px;" type="text" name="equipe2" data-options="required:true, missingMessage:'enter equipe2'" />
 	    			</td>
@@ -123,16 +141,23 @@
 	    				<input id="edit_stade" style="width: 200px; height: 30px;" type="text" name="editStade" value = <%=matchEdit.getStade() %> data-options="required:true, missingMessage:'enter stade'" />
 	    			</td>
 	    		</tr>
+	    		  <%
+          		  int idEquipe1=matchEdit.getIdEquipe1();
+		          EquipeDao equipeDao = new EquipeDao();
+		          Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
+		          int idEquipe2=matchEdit.getIdEquipe2();
+		          Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
+		          %> 
 	    		<tr>
-	    			<td>idEquipe1</td>
+	    			<td>nomEquipe1</td>
 	    			<td>
-	    				<input id="edit_equipe1" style="width: 200px; height: 30px;" type="text" name="editEquipe1" value = <%=matchEdit.getIdEquipe1() %> data-options="required:true, missingMessage:'enter equipe1'" />
+	    				<input id="edit_equipe1" style="width: 200px; height: 30px;" type="text" name="editEquipe1" value = <%=equipe1.getNomEquipe() %> data-options="required:true, missingMessage:'enter equipe1'" />
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>idEquipe2</td>
+	    			<td>nomEquipe2</td>
 	    			<td>
-	    				<input id="edit_equipe2" style="width: 200px; height: 30px;" type="text" name="editEquipe2" value = <%=matchEdit.getIdEquipe2() %> data-options="required:true, missingMessage:'enter equipe2'" />
+	    				<input id="edit_equipe2" style="width: 200px; height: 30px;" type="text" name="editEquipe2" value = <%=equipe2.getNomEquipe() %> data-options="required:true, missingMessage:'enter equipe2'" />
 	    			</td>
 	    		</tr>
 	    		<tr>
@@ -158,6 +183,7 @@
         <form action = "matchServlet">
 		please enter the name of the match <input type = "text" name = "searchInfo"><br/>
 		<input type = "submit" name = "button" value = "search">
+		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
      	  <tr>  
      	  	<th></th>
@@ -188,9 +214,20 @@
                 <th><%=match.getNomMatch()%></th>  
                 <th><%=match.getDate()%></th>  
                 <th><%=match.getVille()%></th>
-                <th><%=match.getStade()%></th>  
-                <th><%=match.getIdEquipe1()%></th>
-                <th><%=match.getIdEquipe2()%></th>  
+                <th><%=match.getStade()%></th>
+                <%
+                int idEquipe1=match.getIdEquipe1();
+                EquipeDao equipeDao = new EquipeDao();
+                Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
+                %>
+                <th><%=equipe1.getNomEquipe()%></th>
+                <!-- <th><%=match.getIdEquipe1()%></th>  -->
+                <%
+                int idEquipe2=match.getIdEquipe2();
+                Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
+                %>
+                <th><%=equipe2.getNomEquipe()%></th>
+                <!-- <th><%=match.getIdEquipe2()%></th>  -->
                 <th><%=match.getPointEquipe1()%></th>
                 <th><%=match.getPointEquipe2()%></th>
                 <br>   
@@ -205,9 +242,20 @@
                 <th><%=matchInfo.getNomMatch()%></th>  
                 <th><%=matchInfo.getDate()%></th>  
                 <th><%=matchInfo.getVille()%></th>
-                <th><%=matchInfo.getStade()%></th>  
-                <th><%=matchInfo.getIdEquipe1()%></th>
-                <th><%=matchInfo.getIdEquipe2()%></th>  
+                <th><%=matchInfo.getStade()%></th>
+                <%
+                int idEquipe1=matchInfo.getIdEquipe1();
+                EquipeDao equipeDao = new EquipeDao();
+                Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
+                %>
+                <th><%=equipe1.getNomEquipe()%></th>
+                <!-- <th><%=matchInfo.getIdEquipe1()%></th> -->
+                <%
+                int idEquipe2=matchInfo.getIdEquipe2();
+                Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
+                %>
+                <th><%=equipe2.getNomEquipe()%></th>  
+                <!-- <th><%=matchInfo.getIdEquipe2()%></th> --> 
                 <th><%=matchInfo.getPointEquipe1()%></th>
                 <th><%=matchInfo.getPointEquipe2()%></th>
                 <br> 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,10 +30,17 @@ public class loginServlet extends HttpServlet {
 		 request.setCharacterEncoding("utf-8");
 		 String name = request.getParameter("login");
 		 String pwd = request.getParameter("password");
+		 
 		 Login login = new Login(name, pwd);
 		 LoginDao loginDao = new LoginDao();
 		 int result = loginDao.login(login);
 		 if(result > 0 ) {
+			 Cookie cookie1 = new Cookie("login",name);
+			 cookie1.setPath("/");
+			 response.addCookie(cookie1);
+			 Cookie cookie2 = new Cookie("password",pwd);
+			 cookie2.setPath("/");
+			 response.addCookie(cookie2);
 			 //response.sendRedirect("view/welcome.jsp"); 
 			 request.getRequestDispatcher("view/welcome.jsp").forward(request,response);
 		 }else {

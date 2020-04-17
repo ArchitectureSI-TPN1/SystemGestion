@@ -16,7 +16,7 @@ vous etre:
   <option value="admin">admin</option>
   <option value="visiter">visiter</option>
   </select> <br/>
-  <input type="submit" />
+  <input type="submit"  value="submit"/>
 </form>	
 
 

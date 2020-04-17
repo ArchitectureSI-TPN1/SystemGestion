@@ -16,15 +16,30 @@
 <% String showAdd = (String) request.getAttribute("showAdd");%>
 <% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
 <% boolean admin = false;
+   String login = "";
+   String password = "";
 	Cookie[]  cookies = httpRequest.getCookies();
    if(cookies != null){
 	   for(Cookie ck : cookies){
 		   if("admin".equals(ck.getValue())){
 			   admin = true;
 		   }
+		   if("login".equals(ck.getName())){
+			   login = ck.getValue();
+		   }
+		   if("password".equals(ck.getName())){
+			   password = ck.getValue();
+		   }
 	   }
    }
 %>
+<% if(admin==false){%>
+<a href="roleServlet?role=visiter">return to page choose table</a>
+<% }%>
+<% if(admin==true){ %>
+<% String web = "loginServlet?login=" + login+ "&password=" + password;%>
+<a href="<%= web%>" > return to page choose table </a>
+<% } %>
 <h2 align = "center">joueurs</h2>  
     <table border = 1px align = "center"> 
     <% if("showAdd".equals(showAdd)){%>
@@ -120,6 +135,7 @@
 		<form action = "joueurServlet">
 		please enter the name of the group <input type = "text" name = "searchInfo" ><br/>
 		<input type = "submit" name = "button" value = "search">
+		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
      	  <tr>  
      	  	<th></th>

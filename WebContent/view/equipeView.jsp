@@ -17,15 +17,30 @@
 <% Equipe equipeEdit = (Equipe) request.getAttribute("equipeEdit"); %>
 <% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
 <% boolean admin = false;
+   String login = "";
+   String password = "";
 	Cookie[]  cookies = httpRequest.getCookies();
    if(cookies != null){
 	   for(Cookie ck : cookies){
 		   if("admin".equals(ck.getValue())){
 			   admin = true;
 		   }
+		   if("login".equals(ck.getName())){
+			   login = ck.getValue();
+		   }
+		   if("password".equals(ck.getName())){
+			   password = ck.getValue();
+		   }
 	   }
    }
 %>
+<% if(admin==false){%>
+<a href="roleServlet?role=visiter">return to page choose table</a>
+<% }%>
+<% if(admin==true){ %>
+<% String web = "loginServlet?login=" + login+ "&password=" + password;%>
+<a href="<%= web%>" > return to page choose table </a>
+<% } %>
 <h2 align = "center">equipe</h2>  
     <table border = 1px align = "center">  
     <% if("showAdd".equals(showAdd)){%>
@@ -98,6 +113,7 @@
         <form action = "equipeServlet">
 		please enter the name of the group <input type = "text" name = "searchInfo"><br/>
 		<input type = "submit" name = "button" value = "search">
+		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
      	  <tr>  
      	  	<th></th>
@@ -133,7 +149,8 @@
                 <th><%=equipeInfo.getIdEquipe() %></th>  
                 <th><%=equipeInfo.getNomEquipe()%></th>  
                 <th><%=equipeInfo. getNbParticipation()%></th>  
-                <th><%=equipeInfo.getNbVictore()%></th><br> 
+                <th><%=equipeInfo.getNbVictore()%></th>
+                <th><a href="classementServlet?classement=<%= equipeInfo.getIdEquipe() %>">classement</a></th><br>
                 <% }  
          %>
           <% if("delSuccess".equals(message)){%>

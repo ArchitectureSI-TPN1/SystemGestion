@@ -2,6 +2,7 @@ package mypackage.servlet;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -67,8 +68,15 @@ public class matchServlet extends HttpServlet {
 			java.sql.Date date = new java.sql.Date(utilDate.getTime());
 			String ville = request.getParameter("ville");
 			String stade = request.getParameter("stade");
-			int idEquipe1 = Integer.parseInt(request.getParameter("equipe1"));
-			int idEquipe2 = Integer.parseInt(request.getParameter("equipe2"));
+			String nomEquipe1 = request.getParameter("equipe1");
+			String nomEquipe2 = request.getParameter("equipe2");
+			EquipeDao equipeDao = new EquipeDao();
+			Equipe equipe1 = equipeDao.searchEquipe(nomEquipe1);
+			int idEquipe1 = equipe1.getIdEquipe();
+			Equipe equipe2 = equipeDao.searchEquipe(nomEquipe2);
+			int idEquipe2 = equipe2.getIdEquipe();
+			//int idEquipe1 = Integer.parseInt(request.getParameter("equipe1"));
+			//int idEquipe2 = Integer.parseInt(request.getParameter("equipe2"));
 			int pointEquipe1 = Integer.parseInt(request.getParameter("point1"));
 			int pointEquipe2 = Integer.parseInt(request.getParameter("point2"));
 			
@@ -96,8 +104,15 @@ public class matchServlet extends HttpServlet {
 			String date = request.getParameter("editDate");
 			String editVille = request.getParameter("editVille");
 			String editStade = request.getParameter("editStade");
-			String editIdEquipe1 = request.getParameter("editEquipe1");
-			String editIdEquipe2 = request.getParameter("editEquipe2");
+			String nomEquipe1 = request.getParameter("editEquipe1");
+			String nomEquipe2 = request.getParameter("editEquipe2");
+			EquipeDao equipeDao = new EquipeDao();
+			Equipe equipe1 = equipeDao.searchEquipe(nomEquipe1);
+			int idEquipe1 = equipe1.getIdEquipe();
+			Equipe equipe2 = equipeDao.searchEquipe(nomEquipe2);
+			int idEquipe2 = equipe2.getIdEquipe();
+			//String editIdEquipe1 = request.getParameter("editEquipe1");
+			//String editIdEquipe2 = request.getParameter("editEquipe2");
 			String editPoint1 = request.getParameter("editPoint1");
 			String editPoint2 = request.getParameter("editPoint2");
 
@@ -117,8 +132,10 @@ public class matchServlet extends HttpServlet {
 			match.setDate(editdate);
 			match.setVille(editVille);
 			match.setStade(editStade);
-			match.setIdEquipe1(Integer.parseInt(editIdEquipe1));
-			match.setIdEquipe2(Integer.parseInt(editIdEquipe2));
+			match.setIdEquipe1(idEquipe1);
+			match.setIdEquipe2(idEquipe2);
+			//match.setIdEquipe1(Integer.parseInt(editIdEquipe1));
+			//match.setIdEquipe2(Integer.parseInt(editIdEquipe2));
 			match.setPointEquipe1(Integer.parseInt(editPoint1));
 			match.setPointEquipe2(Integer.parseInt(editPoint2));
 			
@@ -127,6 +144,11 @@ public class matchServlet extends HttpServlet {
 				request.getRequestDispatcher("SystemServlet?element=match").forward(request,response);
 			}
 			
+		}else if("ListAll".equals(button)) {
+			MatchDao matchDao = new MatchDao();
+			List<Match> matchs = matchDao.getMatchs();
+			request.setAttribute("matchs", matchs);
+			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
 		}
 
 		if("edit".equals(button) && request.getParameter("chk") == null) {

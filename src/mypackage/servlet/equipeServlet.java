@@ -1,13 +1,16 @@
 package mypackage.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mypackage.dao.EquipeDao;
+import mypackage.dao.JoueurDao;
 import mypackage.model.Equipe;
+import mypackage.model.Joueur;
 
 /**
  * Servlet implementation class equipeServlet
@@ -81,6 +84,11 @@ public class equipeServlet extends HttpServlet {
 				request.getRequestDispatcher("SystemServlet?element=equipe").forward(request,response);
 			}
 			
+		}else if("ListAll".equals(button)) {
+			EquipeDao equipeDao = new EquipeDao();
+			List<Equipe> equipes = equipeDao.getEquipes();
+			request.setAttribute("equipes", equipes);
+			request.getRequestDispatcher("view/equipeView.jsp").forward(request,response);
 		}
 
 		if("edit".equals(button) && request.getParameter("chk") == null) {
