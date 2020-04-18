@@ -43,6 +43,11 @@ public class classementServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/**
+	 * trouver les classements de certaine equipe
+	 * @param paramId id d'equipe
+	 * @return list de classements
+	 */
 	private List<Classement> searchClassements(int paramId) {
 		ClassementDao classementDao = new ClassementDao();
 		return classementDao.searchClassements(paramId);

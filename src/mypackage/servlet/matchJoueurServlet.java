@@ -54,6 +54,10 @@ public class matchJoueurServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/** 
+	 * les fonctions de traitement des donnes en  utilisant les fonctions dans DAO   
+	 **/
+	
 	private List<Joueur> searchJoueurs(int paramId) {
 		JoueurDao joueurDao = new JoueurDao();
 		return joueurDao.searchJoueurByMatch(paramId);

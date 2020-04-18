@@ -10,6 +10,10 @@ import mypackage.model.Equipe;
 
 public class EquipeDao extends BaseDao{
 
+	/**
+	 * obtenir tous les equipes
+	 * @return list des equipe
+	 */
 	public List<Equipe> getEquipes(){
 		String sql = "select * from equipe";
 		ResultSet rs = query(sql); 
@@ -29,6 +33,11 @@ public class EquipeDao extends BaseDao{
 		return equipes;
 	}
 	
+	/**
+	 * ajouter un equipe dans BD
+	 * @param equipe 
+	 * @return true or false 
+	 */
 	public boolean addEquipe(Equipe equipe) {
 		String sql = "insert into equipe values(" + equipe.getIdEquipe();
 		sql += ",'"+equipe.getNomEquipe()+"'"; 
@@ -38,12 +47,22 @@ public class EquipeDao extends BaseDao{
 		return update(sql);
 	}
 	
+	/**
+	 * supprimer un equipe par id d'equipe
+	 * @param paramId id d'equipe
+	 * @return true or false
+	 */
 	public boolean deleteEquipe(int paramId) {
 		// TODO Auto-generated method stub
 		String sql = "delete from equipe where idEquipe =" + paramId; 
 		return update(sql);
 	}
 	
+	/**
+	 * modifier les informations d'equipe
+	 * @param equipe
+	 * @return true or false
+	 */
 	public boolean editEquipe(Equipe equipe) {
 		int id = equipe.getIdEquipe();
 		String nomEquipe = equipe.getNomEquipe();
@@ -58,6 +77,11 @@ public class EquipeDao extends BaseDao{
 		return update(sql);
 	}
 	
+	/**
+	 * rechercher un equipe par nom d'equipe
+	 * @param ParamNom nom d'equipe
+	 * @return equipe
+	 */
 	public Equipe searchEquipe(String ParamNom) {
 		String sql = "select * from equipe where nomEquipe = '" + ParamNom +"';";
 		Equipe equipe = null;
@@ -77,6 +101,11 @@ public class EquipeDao extends BaseDao{
 		return equipe;
 	}
 	
+	/**
+	 * rechercher un equipe par id d'equipe
+	 * @param ParamId id d'equipe
+	 * @return equipe
+	 */
 	public Equipe searchEquipe(int ParamId) {
 		String sql = "select * from equipe where idEquipe = '" + ParamId +"';";
 		Equipe equipe = null;

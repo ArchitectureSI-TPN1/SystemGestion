@@ -41,11 +41,9 @@ public class loginServlet extends HttpServlet {
 			 Cookie cookie2 = new Cookie("password",pwd);
 			 cookie2.setPath("/");
 			 response.addCookie(cookie2);
-			 //response.sendRedirect("view/welcome.jsp"); 
 			 request.getRequestDispatcher("view/welcome.jsp").forward(request,response);
 		 }else {
 			 request.getRequestDispatcher("view/404.jsp").forward(request,response);
-			 //response.sendRedirect("view/404.jsp");
 		 }
 	}
 

@@ -41,17 +41,6 @@ public class matchServlet extends HttpServlet {
 		//Match match;
 		Match match = null;
 		if(nomEquipe != null && "search".equals(button)) {
-			/*match = searchMatch(nomMatch);
-			Equipe equipe1 = null;
-			Equipe equipe2 = null;
-			if(match!=null) {
-				equipe1 =	searchEquipe(match.getIdEquipe1());
-				equipe2 =	searchEquipe(match.getIdEquipe2());
-			}		
-			//System.out.println(equipe.getIdEquipe());
-			request.setAttribute("equipe1",equipe1 );
-			request.setAttribute("equipe2",equipe2 );
-			request.setAttribute("matchInfo", match);*/
 			MatchDao matchDao = new MatchDao();
 			matchs = searchMarchByEN(nomEquipe);
 			if(matchs!=null) {
@@ -132,13 +121,9 @@ public class matchServlet extends HttpServlet {
 			int idEquipe1 = equipe1.getIdEquipe();
 			Equipe equipe2 = equipeDao.searchEquipe(nomEquipe2);
 			int idEquipe2 = equipe2.getIdEquipe();
-			//String editIdEquipe1 = request.getParameter("editEquipe1");
-			//String editIdEquipe2 = request.getParameter("editEquipe2");
 			String editPoint1 = request.getParameter("editPoint1");
 			String editPoint2 = request.getParameter("editPoint2");
 
-			//Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-			//java.sql.Date editdate = new java.sql.Date(utilDate.getTime());
 			Date utilDate = null;
 			try {
 				utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
@@ -182,6 +167,9 @@ public class matchServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	/** 
+	 * les fonctions de traitement des donnes en  utilisant les fonctions dans DAO   
+	 **/
 	
 	private Match searchMatch(int idMatch) {
 		MatchDao matchDao = new MatchDao();

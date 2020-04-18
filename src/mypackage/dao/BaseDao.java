@@ -7,11 +7,14 @@ import java.sql.SQLException;
 
 import mypackage.util.DbUtil;
 
-
+/**
+ * les foncitons pour BD 
+ * @author XR et WK
+ *
+ */
 public class BaseDao {
 	private DbUtil dbUtil = new DbUtil();
-	
-	
+
 	public void closeCon(){
 		dbUtil.closeCon();
 	}

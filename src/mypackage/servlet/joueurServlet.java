@@ -118,6 +118,13 @@ public class joueurServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
+	
+	/** 
+	 * les fonctions de traitement des donnes en  utilisant les fonctions dans DAO   
+	 **/
+	
 	private boolean addJoueur(Joueur joueurAdd) {
 		JoueurDao joueurDao = new JoueurDao();
 		return joueurDao.addJoueur(joueurAdd);

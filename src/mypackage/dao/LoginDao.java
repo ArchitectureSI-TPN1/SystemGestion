@@ -9,6 +9,12 @@ import java.sql.SQLException;
 import mypackage.model.Login;
 
 public class LoginDao extends BaseDao{
+	
+	/**
+	 * verifier les informations de admin
+	 * @param login
+	 * @return resultat de verifiration
+	 */
 	public int login(Login login) {
 		String name = login.getLogin();
 		String password = login.getPassword();

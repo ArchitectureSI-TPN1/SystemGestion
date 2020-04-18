@@ -8,6 +8,10 @@ import java.util.List;
 import mypackage.model.Joueur;
 
 public class JoueurDao extends BaseDao{
+	/**
+	 * obtenir tous les joueurs
+	 * @return list des joueurs
+	 */
 	public List<Joueur> getJoueurs(){
 		String sql = "select * from joueur";
 		ResultSet rs = query(sql); 
@@ -30,6 +34,10 @@ public class JoueurDao extends BaseDao{
 		return joueurs;
 	}
 	
+	/**
+	 * obtenir les noms des equipes 
+	 * @return list de noms des equipes 
+	 */
 	public List<String> getNomEquipes(){
 		String sql = "select * from joueur";
 		ResultSet rs = query(sql); 
@@ -45,6 +53,11 @@ public class JoueurDao extends BaseDao{
 		return nomEquipes;
 	}
 	
+	/**
+	 * ajouter un jouneur
+	 * @param joueurAdd
+	 * @return true or false
+	 */
 	public boolean addJoueur(Joueur joueurAdd) {
 		String sql = "insert into joueur values(" + joueurAdd.getIdjoueur();
 		sql += ",'"+joueurAdd.getNomJoueur()+"'"; ;
@@ -57,6 +70,11 @@ public class JoueurDao extends BaseDao{
 		return update(sql);
 	}
 	
+	/**
+	 * rechercher un joueur par nom de joueur
+	 * @param ParamNom nom de joueur
+	 * @return joueur
+	 */
 	public Joueur searchJoueur(String ParamNom) {
 		String sql = "select * from joueur where nomJoueur = '" + ParamNom +"';";
 		Joueur joueur = null;
@@ -78,6 +96,11 @@ public class JoueurDao extends BaseDao{
 		return joueur;
 	}
 	
+	/**
+	 * rechercher un joueur par id de joueur
+	 * @param ParamId id de joueur
+	 * @return joueur
+	 */
 	public Joueur searchJoueur(int ParamId) {
 		String sql = "select * from joueur where idJoueur = "+ParamId;;
 		Joueur joueur = null;
@@ -99,11 +122,21 @@ public class JoueurDao extends BaseDao{
 		return joueur;
 	}
 	
+	/**
+	 * supprimer un joueur par id de joueur
+ 	 * @param ParamId id de joueur
+	 * @return true of false
+	 */
 	public boolean deleteJoueur(int ParamId) {
 		String sql = "delete from joueur where idJoueur =" + ParamId; 
 		return update(sql);
 	}
 	
+	/**
+	 * modifier les informations de certain joueur
+	 * @param joueur
+	 * @return true or false
+	 */
 	public boolean editJoueur(Joueur joueur) {
 		int id = joueur.getIdjoueur();
 		String nomJoueur = joueur.getNomJoueur();
@@ -122,6 +155,11 @@ public class JoueurDao extends BaseDao{
 		return update(sql);
 	}
 	
+	/**
+	 * obtenir le nom d'equipe par id d'equipe
+	 * @param paramId id d'equipe
+	 * @return le nom d'equipe
+	 */
 	public String searcheEquipeByid(int paramId) {
 		String sql = "select nomEquipe from equipe where idEquipe = " + paramId;
 		ResultSet rs = query(sql);
@@ -136,6 +174,11 @@ public class JoueurDao extends BaseDao{
 		return nomEquipe;
 		}
 	
+	/**
+	 * obtenir le id d'equipe par nom d'equipe
+	 * @param paramNom le nom d'equipe
+	 * @return id d'equipe
+	 */
 	public int searchIdBynom(String paramNom) {
 		String sql = "select idEquipe from equipe where nomEquipe = '"+paramNom+"'";
 		ResultSet rs = query(sql);
@@ -150,6 +193,11 @@ public class JoueurDao extends BaseDao{
 		return idEquipe;
 		}
 	
+	/**
+	 * obtenir les joueurs qui ont participe a certain match
+	 * @param idMatch ide de match
+	 * @return list de joueurs
+	 */
 	public List<Joueur> searchJoueurByMatch(int idMatch){
 		List<Joueur> joueurs = new ArrayList<Joueur>();
 		String sql = "SELECT * FROM matchinfo Left Join joueur_match "

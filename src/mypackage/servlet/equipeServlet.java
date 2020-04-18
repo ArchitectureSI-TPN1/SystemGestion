@@ -36,7 +36,6 @@ public class equipeServlet extends HttpServlet {
 		Equipe equipe = null;
 		if(nomEquipe != null && "search".equals(button)) {
 			equipe = searchEquipe(nomEquipe);
-			//System.out.println(equipe.getIdEquipe());
 			request.setAttribute("equipeInfo", equipe);
 			request.getRequestDispatcher("view/equipeView.jsp").forward(request,response);
 		}else if(request.getParameter("chk") != null && "delete".equals(button)) {
@@ -105,6 +104,11 @@ public class equipeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	
+	/** 
+	 * les fonctions de traitement des donnes en  utilisant les fonctions dans DAO   
+	 **/
 	
 	private Equipe searchEquipe(String nomEquipe) {
 		EquipeDao equipeDao = new EquipeDao();

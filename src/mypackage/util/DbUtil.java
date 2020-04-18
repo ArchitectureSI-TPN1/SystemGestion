@@ -7,6 +7,12 @@ import java.sql.SQLException;
 
 import javax.management.loading.PrivateClassLoader;
 
+
+/**
+ * connecter et deconnecter avec BD
+ * @author XR et WK
+ *
+ */
 public class DbUtil {
 	
 	private String dbUrl = "jdbc:mysql://127.0.0.1:3306/systemgestion?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT";

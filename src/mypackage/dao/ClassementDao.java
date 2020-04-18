@@ -10,6 +10,11 @@ import mypackage.model.Equipe;
 
 public class ClassementDao extends BaseDao{
 
+	/**
+	 * rechercher les classements de certain equipe
+	 * @param paramId id d'equipe
+	 * @return list de classement
+	 */
 	public List<Classement> searchClassements(int paramId) {
 		String sql = "select * from classement where Equipe_idEquipe = "+ paramId;
 		ResultSet rs = query(sql);

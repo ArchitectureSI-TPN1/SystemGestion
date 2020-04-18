@@ -55,8 +55,6 @@ public class SystemServlet extends HttpServlet {
 			request.setAttribute("matchs", matchs);
 			request.setAttribute("nomsEquipes1", nomsEquipes1);
 			request.setAttribute("nomsEquipes2", nomsEquipes2);
-
-			//List<Equipe> equipes1 = 
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);		
 		}
 	}
