@@ -12,7 +12,7 @@
 
 <%List list = (List) request.getAttribute("classements");%>
 <%  if(list != null){%>
-<h2 align = "center">joueurs</h2>  
+<h2 align = "center">classement</h2>  
 <table border="1" align = "center">
   <tr>  
    <th>idclassement</th>  

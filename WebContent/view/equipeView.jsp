@@ -24,6 +24,7 @@
 	   for(Cookie ck : cookies){
 		   if("admin".equals(ck.getValue())){
 			   admin = true;
+			   System.out.println(ck.getValue());
 		   }
 		   if("login".equals(ck.getName())){
 			   login = ck.getValue();
@@ -34,6 +35,8 @@
 	   }
    }
 %>
+	
+
 <% if(admin==false){%>
 <a href="roleServlet?role=visiter">return to page choose table</a>
 <% }%>

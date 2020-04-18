@@ -15,6 +15,7 @@
 <% Joueur joueurEdit = (Joueur) request.getAttribute("joueurEdit"); %>
 <% String showAdd = (String) request.getAttribute("showAdd");%>
 <% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
+<% List listNomEquipes = (List) request.getAttribute("nomEquipes");%>
 <% boolean admin = false;
    String login = "";
    String password = "";
@@ -163,7 +164,7 @@
                 <th><%=joueur.getBut()%></th>  
                 <th><%=joueur.getRole()%></th>  
                 <th><%=joueur.getNotePrese()%></th>
-                <th><%=joueur. getEquipe_idEquipe()%></th><br>   
+                <th><%=listNomEquipes.get(i)%></th><br>   
                 
         <% }%> 
         <% }%>

@@ -12,6 +12,7 @@ public class JoueurDao extends BaseDao{
 		String sql = "select * from joueur";
 		ResultSet rs = query(sql); 
 		List<Joueur> joueurs = new ArrayList<Joueur>();
+		
 		try {
 			while(rs.next()) {
 				Joueur joueur = new Joueur();
@@ -27,6 +28,21 @@ public class JoueurDao extends BaseDao{
 				e.printStackTrace();
 			}
 		return joueurs;
+	}
+	
+	public List<String> getNomEquipes(){
+		String sql = "select * from joueur";
+		ResultSet rs = query(sql); 
+		List<String> nomEquipes = new ArrayList<String>();
+		try {
+			while(rs.next()) {
+				String nomEquipe = searcheEquipeByid(rs.getInt("Equipe_idEquipe")); 
+				nomEquipes.add(nomEquipe);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return nomEquipes;
 	}
 	
 	public boolean addJoueur(Joueur joueurAdd) {
@@ -105,4 +121,18 @@ public class JoueurDao extends BaseDao{
 		System.out.println(sql);
 		return update(sql);
 	}
+	
+	private String searcheEquipeByid(int paramId) {
+		String sql = "select nomEquipe from equipe where idEquipe = " + paramId;
+		ResultSet rs = query(sql);
+		String nomEquipe = null;
+		try {
+			while(rs.next()) {
+				nomEquipe = rs.getString("nomEquipe");
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		return nomEquipe;
+		}
 }

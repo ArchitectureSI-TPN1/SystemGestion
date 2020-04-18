@@ -11,7 +11,7 @@ public class DbUtil {
 	
 	private String dbUrl = "jdbc:mysql://127.0.0.1:3306/systemgestion?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT";
 	private String dbUser = "root";
-	private String dbPassword = "";
+	private String dbPassword = "960523";
 	private String jdbcName = "com.mysql.jdbc.Driver";
 	private Connection connection = null;
 	public Connection getConnection(){

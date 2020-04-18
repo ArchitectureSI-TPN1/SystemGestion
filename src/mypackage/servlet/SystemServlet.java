@@ -43,6 +43,8 @@ public class SystemServlet extends HttpServlet {
 		}else if("joueur".equals(element)) {
 			JoueurDao joueurDao = new JoueurDao();
 			List<Joueur> joueurs = joueurDao.getJoueurs();
+			List<String> nomEquipes = joueurDao.getNomEquipes();
+			request.setAttribute("nomEquipes", nomEquipes);
 			request.setAttribute("joueurs", joueurs);
 			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 		}else if("match".equals(element)){
