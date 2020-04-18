@@ -13,7 +13,6 @@ public class LoginDao extends BaseDao{
 		String name = login.getLogin();
 		String password = login.getPassword();
 		String sql = "select count(*) from login where login = '" + name + "' and password = '" + password + "'";
-		
 		ResultSet rs = query(sql);		
 		int result = -1;
 		try {

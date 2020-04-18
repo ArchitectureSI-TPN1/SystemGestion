@@ -36,7 +36,11 @@ public class joueurServlet extends HttpServlet {
 		Joueur joueur = null;
 		if(nomJoueur != null && "search".equals(button)) {
 			joueur = searchJoueur(nomJoueur);
-			//System.out.println(equipe.getIdEquipe());
+			Equipe equipe = null;
+			if(joueur!=null) {
+				equipe =	searchEquipe(joueur.getEquipe_idEquipe());
+			}		
+			request.setAttribute("equipe",equipe );
 			request.setAttribute("joueurInfo", joueur);
 			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 		}else if(request.getParameter("chk") != null && "delete".equals(button)) {
@@ -149,6 +153,12 @@ public class joueurServlet extends HttpServlet {
 	private String searchNomById(int paramId) {
 		JoueurDao joueurDao = new JoueurDao();
 		return joueurDao.searcheEquipeByid(paramId);
+	}
+	
+	private Equipe searchEquipe(int idEquipe) {
+		EquipeDao equipeDao = new EquipeDao();
+		Equipe equipe = equipeDao.searchEquipe(idEquipe);
+		return equipe;
 	}
 	
 }

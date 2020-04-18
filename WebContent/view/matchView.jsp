@@ -141,13 +141,8 @@
 	    				<input id="edit_stade" style="width: 200px; height: 30px;" type="text" name="editStade" value = <%=matchEdit.getStade() %> data-options="required:true, missingMessage:'enter stade'" />
 	    			</td>
 	    		</tr>
-	    		  <%
-          		  int idEquipe1=matchEdit.getIdEquipe1();
-		          EquipeDao equipeDao = new EquipeDao();
-		          Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
-		          int idEquipe2=matchEdit.getIdEquipe2();
-		          Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
-		          %> 
+	    		<% Equipe equipe1 = (Equipe) request.getAttribute("equipe1"); %>
+                <% Equipe equipe2 = (Equipe) request.getAttribute("equipe2"); %>   
 	    		<tr>
 	    			<td>nomEquipe1</td>
 	    			<td>
@@ -203,6 +198,8 @@
 		<input type = "submit" name = "button" value = "add"> 
         <input type = "submit" name = "button" value = "edit">
         <%} %>
+        <%List listNomEquipes1 = (List) request.getAttribute("nomsEquipes1");%>
+        <%List listNomEquipes2 = (List) request.getAttribute("nomsEquipes2");%>
         <%  if(list != null){%>
         <% for(int i = 0;i<list.size();i++){%>
                 <%Match match = (Match)list.get(i);%> 
@@ -215,19 +212,8 @@
                 <th><%=match.getDate()%></th>  
                 <th><%=match.getVille()%></th>
                 <th><%=match.getStade()%></th>
-                <%
-                int idEquipe1=match.getIdEquipe1();
-                EquipeDao equipeDao = new EquipeDao();
-                Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
-                %>
-                <th><%=equipe1.getNomEquipe()%></th>
-                <!-- <th><%=match.getIdEquipe1()%></th>  -->
-                <%
-                int idEquipe2=match.getIdEquipe2();
-                Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
-                %>
-                <th><%=equipe2.getNomEquipe()%></th>
-                <!-- <th><%=match.getIdEquipe2()%></th>  -->
+                <th><%=listNomEquipes2.get(i)%></th>
+                <th><%=listNomEquipes2.get(i)%></th>
                 <th><%=match.getPointEquipe1()%></th>
                 <th><%=match.getPointEquipe2()%></th>
                 <br>   
@@ -243,19 +229,10 @@
                 <th><%=matchInfo.getDate()%></th>  
                 <th><%=matchInfo.getVille()%></th>
                 <th><%=matchInfo.getStade()%></th>
-                <%
-                int idEquipe1=matchInfo.getIdEquipe1();
-                EquipeDao equipeDao = new EquipeDao();
-                Equipe equipe1 = equipeDao.searchEquipe(idEquipe1);
-                %>
+                <% Equipe equipe1 = (Equipe) request.getAttribute("equipe1"); %>
+                <% Equipe equipe2 = (Equipe) request.getAttribute("equipe2"); %>           
                 <th><%=equipe1.getNomEquipe()%></th>
-                <!-- <th><%=matchInfo.getIdEquipe1()%></th> -->
-                <%
-                int idEquipe2=matchInfo.getIdEquipe2();
-                Equipe equipe2 = equipeDao.searchEquipe(idEquipe2);
-                %>
                 <th><%=equipe2.getNomEquipe()%></th>  
-                <!-- <th><%=matchInfo.getIdEquipe2()%></th> --> 
                 <th><%=matchInfo.getPointEquipe1()%></th>
                 <th><%=matchInfo.getPointEquipe2()%></th>
                 <br> 

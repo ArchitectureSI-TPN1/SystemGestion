@@ -83,9 +83,11 @@ public class MatchDao extends BaseDao{
 	public Match searchMatch(int idMatch){
 		String sql = "select * from matchinfo where idmatch = '" + idMatch +"';";
 		ResultSet rs = query(sql); 
-		Match match = new Match();
+		Match match = null;
+	
 		try {
 			while(rs.next()) {
+				match = new Match();
 				match.setIdMatch(rs.getInt("idmatch"));
 				match.setNomMatch(rs.getString("nomMatch"));
 				match.setDate(rs.getDate("date"));
@@ -95,6 +97,7 @@ public class MatchDao extends BaseDao{
 				match.setIdEquipe2(rs.getInt("Equipe_idEquipe2"));
 				match.setPointEquipe1(rs.getInt("pointEquipe1"));
 				match.setPointEquipe2(rs.getInt("pointEquipe2"));
+				return match;
 				
 			}
 			}catch(SQLException e) {
@@ -107,9 +110,11 @@ public class MatchDao extends BaseDao{
 	public Match searchMatch(String nomMatch){
 		String sql = "select * from matchinfo where nomMatch = '" + nomMatch +"';";
 		ResultSet rs = query(sql); 
-		Match match = new Match();
+		Match match = null;
+		
 		try {
 			while(rs.next()) {
+				match = new Match();
 				match.setIdMatch(rs.getInt("idmatch"));
 				match.setNomMatch(rs.getString("nomMatch"));
 				match.setDate(rs.getDate("date"));
@@ -119,6 +124,7 @@ public class MatchDao extends BaseDao{
 				match.setIdEquipe2(rs.getInt("Equipe_idEquipe2"));
 				match.setPointEquipe1(rs.getInt("pointEquipe1"));
 				match.setPointEquipe2(rs.getInt("pointEquipe2"));
+				return match;
 			}
 			}catch(SQLException e) {
 				e.printStackTrace();
@@ -149,5 +155,33 @@ public class MatchDao extends BaseDao{
 			}
 		return matchs;
 	}
+	
+	public List<String> getNomsEquipes(int m) {
+		String sql = "select * from matchinfo";
+		ResultSet rs = query(sql); 
+		List<String> nomsEquipes = new ArrayList<String>();
+		//List<String> nomEquipes = new ArrayList<String>();
+		try {
+			while(rs.next()) {
+				EquipeDao equipeDao = new EquipeDao();
+				String nomEquipe = "";
+				if(m==0) {
+					nomEquipe = equipeDao.searchEquipe(rs.getInt("Equipe_idEquipe1")).getNomEquipe();
+
+				}else if(m==1) {
+					nomEquipe = equipeDao.searchEquipe(rs.getInt("Equipe_idEquipe2")).getNomEquipe();
+
+				}
+				//String nomEquipe = searcheEquipeByid(rs.getInt("Equipe_idEquipe")); 
+				nomsEquipes.add(nomEquipe);
+				
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return nomsEquipes;
+	}
+
+	
 	
 }

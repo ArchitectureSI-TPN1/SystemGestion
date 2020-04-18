@@ -40,7 +40,15 @@ public class matchServlet extends HttpServlet {
 		Match match = null;
 		if(nomMatch != null && "search".equals(button)) {
 			match = searchMatch(nomMatch);
+			Equipe equipe1 = null;
+			Equipe equipe2 = null;
+			if(match!=null) {
+				equipe1 =	searchEquipe(match.getIdEquipe1());
+				equipe2 =	searchEquipe(match.getIdEquipe2());
+			}		
 			//System.out.println(equipe.getIdEquipe());
+			request.setAttribute("equipe1",equipe1 );
+			request.setAttribute("equipe2",equipe2 );
 			request.setAttribute("matchInfo", match);
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
 		}else if(request.getParameter("chk") != null && "delete".equals(button)) {
@@ -75,8 +83,6 @@ public class matchServlet extends HttpServlet {
 			int idEquipe1 = equipe1.getIdEquipe();
 			Equipe equipe2 = equipeDao.searchEquipe(nomEquipe2);
 			int idEquipe2 = equipe2.getIdEquipe();
-			//int idEquipe1 = Integer.parseInt(request.getParameter("equipe1"));
-			//int idEquipe2 = Integer.parseInt(request.getParameter("equipe2"));
 			int pointEquipe1 = Integer.parseInt(request.getParameter("point1"));
 			int pointEquipe2 = Integer.parseInt(request.getParameter("point2"));
 			
@@ -96,6 +102,10 @@ public class matchServlet extends HttpServlet {
 			String edit = request.getParameter("chk");
 				request.setAttribute("matchEdit", "alertVide");	
 			Match matchEdit = searchMatch(Integer.parseInt(edit));
+			Equipe equipe1 = searchEquipe(matchEdit.getIdEquipe1());
+			Equipe equipe2 = searchEquipe(matchEdit.getIdEquipe2());
+			request.setAttribute("equipe1",equipe1 );
+			request.setAttribute("equipe2",equipe2 );
 			request.setAttribute("matchEdit", matchEdit);	
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
 		}else if("submitEdit".equals(button)) {
@@ -134,8 +144,6 @@ public class matchServlet extends HttpServlet {
 			match.setStade(editStade);
 			match.setIdEquipe1(idEquipe1);
 			match.setIdEquipe2(idEquipe2);
-			//match.setIdEquipe1(Integer.parseInt(editIdEquipe1));
-			//match.setIdEquipe2(Integer.parseInt(editIdEquipe2));
 			match.setPointEquipe1(Integer.parseInt(editPoint1));
 			match.setPointEquipe2(Integer.parseInt(editPoint2));
 			
@@ -145,10 +153,7 @@ public class matchServlet extends HttpServlet {
 			}
 			
 		}else if("ListAll".equals(button)) {
-			MatchDao matchDao = new MatchDao();
-			List<Match> matchs = matchDao.getMatchs();
-			request.setAttribute("matchs", matchs);
-			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
+			request.getRequestDispatcher("SystemServlet?element=match").forward(request,response);
 		}
 
 		if("edit".equals(button) && request.getParameter("chk") == null) {
@@ -165,6 +170,7 @@ public class matchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
 	
 	private Match searchMatch(int idMatch) {
 		MatchDao matchDao = new MatchDao();
@@ -193,6 +199,13 @@ public class matchServlet extends HttpServlet {
 		MatchDao  matchDao = new MatchDao();
 		return matchDao.editMatch(match);
 	}
+	
+	private Equipe searchEquipe(int idEquipe) {
+		EquipeDao equipeDao = new EquipeDao();
+		Equipe equipe = equipeDao.searchEquipe(idEquipe);
+		return equipe;
+	}
+
 
 
 }

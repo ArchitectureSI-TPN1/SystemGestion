@@ -50,7 +50,13 @@ public class SystemServlet extends HttpServlet {
 		}else if("match".equals(element)){
 			MatchDao matchDao = new MatchDao();
 			List<Match> matchs = matchDao.getMatchs();
+			List<String> nomsEquipes1 = matchDao.getNomsEquipes(0);
+			List<String> nomsEquipes2 = matchDao.getNomsEquipes(1);
 			request.setAttribute("matchs", matchs);
+			request.setAttribute("nomsEquipes1", nomsEquipes1);
+			request.setAttribute("nomsEquipes2", nomsEquipes2);
+
+			//List<Equipe> equipes1 = 
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);		
 		}
 	}

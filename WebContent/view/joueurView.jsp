@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="mypackage.model.Joueur"%>  
+<%@ page import="mypackage.model.Equipe"%>  
 <%@ page language="java" import="java.util.List"%>  
 <!DOCTYPE html>
 <html>
@@ -146,7 +147,7 @@
             <th>But</th>  
             <th>Role</th>  
             <th>NotePrese</th>
-            <th>Equipe_idEquipe</th>    
+            <th>NomEquipe</th>    
         </tr>
     	<% if(admin){%>
         <form action = "joueurServlet">
@@ -180,7 +181,8 @@
                 <th><%=joueurInfo.getBut()%></th>  
                 <th><%=joueurInfo.getRole()%></th>  
                 <th><%=joueurInfo.getNotePrese()%></th>
-                <th><%=joueurInfo. getEquipe_idEquipe()%></th><br> 
+                <% Equipe equipe = (Equipe) request.getAttribute("equipe"); %>
+                <th><%=equipe.getNomEquipe()%></th><br> 
                 <% }  
          %>
          
