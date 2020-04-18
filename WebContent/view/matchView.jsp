@@ -175,11 +175,13 @@
 	
 	
     <% if(!"showAdd".equals(showAdd) && matchEdit == null) {%>
+        <div align="center"> 
         <form action = "matchServlet">
 		please enter the name of the group <input type = "text" name = "searchInfo"><br/>
 		<input type = "submit" name = "button" value = "search">
 		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
+		</div>
      	  <tr>  
      	  	<th></th>
             <th>id</th>  
@@ -191,13 +193,16 @@
             <th>equipe2</th> 
             <th>point1</th> 
             <th>point2</th> 
+            <th>joueurs</th> 
         </tr> 
     	<% if(admin){%>
+    	<div align="center"> 
         <form action = "matchServlet">
         <input type = "submit" name = "button" value = "delete">
 		<input type = "submit" name = "button" value = "add"> 
         <input type = "submit" name = "button" value = "edit">
         <%} %>
+        </div>
         <%List listNomEquipes1 = (List) request.getAttribute("nomsEquipes1");%>
         <%List listNomEquipes2 = (List) request.getAttribute("nomsEquipes2");%>
         <%  if(list != null){%>
@@ -216,6 +221,7 @@
                 <th><%=listNomEquipes2.get(i)%></th>
                 <th><%=match.getPointEquipe1()%></th>
                 <th><%=match.getPointEquipe2()%></th>
+                <th><a href="matchJoueurServlet?match=<%=match.getIdMatch() %>">Joueurs</a></th>
                 <br>   
                 
         <% }%> 
@@ -238,6 +244,7 @@
                 <th><%=NomEquipes2.get(i)%></th>  
                 <th><%=match.getPointEquipe1()%></th>
                 <th><%=match.getPointEquipe2()%></th>
+                <th><a href="matchJoueurServlet?match=<%=match.getIdMatch() %>">Joueurs</a></th>
                 <br> 
                 <% }  
          %>

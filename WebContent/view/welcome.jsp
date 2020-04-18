@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div align="center"> 
 <form action="SystemServlet">
 Element : <select name="element">
   <option value="equipe">equipe</option>
@@ -16,5 +16,6 @@ Element : <select name="element">
 </select> <br/>
 <input type="submit" value = "submit" />
 </form>	
+</div>
 </body>
 </html>

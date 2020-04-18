@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div align="center"> 
 <h1>bienvenue a notre systeme de gestion</h1>
 vous etre: 
 
@@ -18,8 +19,7 @@ vous etre:
   </select> <br/>
   <input type="submit"  value="submit"/>
 </form>	
-
-
+</div>
 
 
 

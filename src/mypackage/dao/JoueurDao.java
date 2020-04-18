@@ -150,4 +150,30 @@ public class JoueurDao extends BaseDao{
 		return idEquipe;
 		}
 	
+	public List<Joueur> searchJoueurByMatch(int idMatch){
+		List<Joueur> joueurs = new ArrayList<Joueur>();
+		String sql = "SELECT * FROM matchinfo Left Join joueur_match "
+				+ "ON matchinfo.idmatch = joueur_match.Match_idMatch LEFT JOIN joueur "
+				+ "ON joueur_match.joueur_idJoueur = joueur.idjoueur "
+				+ "WHERE matchinfo.idmatch = "
+				+ idMatch ;
+		ResultSet rs = query(sql); 
+		
+		try {
+			while(rs.next()) {
+				Joueur joueur = new Joueur();
+				joueur.setIdjoueur(rs.getInt("idJoueur"));
+				joueur.setNomJoueur(rs.getString("nomJoueur"));
+				joueur.setBut(rs.getInt("but"));
+				joueur.setRole(rs.getString("role"));
+				joueur.setNotePrese(rs.getFloat("notePrese"));
+				joueur.setEquipe_idEquipe(rs.getInt("Equipe_idEquipe"));
+				joueurs.add(joueur);
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		return joueurs;
+	}
+	
 	}

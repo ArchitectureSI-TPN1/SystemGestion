@@ -99,5 +99,14 @@
     <servlet-name>matchServlet</servlet-name>
     <url-pattern>/matchServlet</url-pattern>
   </servlet-mapping>
- 
+  <servlet>
+    <description></description>
+    <display-name>matchJoueurServlet</display-name>
+    <servlet-name>matchJoueurServlet</servlet-name>
+    <servlet-class>mypackage.servlet.matchJoueurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>matchJoueurServlet</servlet-name>
+    <url-pattern>/matchJoueurServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

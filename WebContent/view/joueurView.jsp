@@ -135,11 +135,13 @@
 	<% } %>
 	
 	<% if(!"showAdd".equals(showAdd) && joueurEdit == null){%>
+		<div align="center"> 
 		<form action = "joueurServlet">
 		please enter the name of the player <input type = "text" name = "searchInfo" ><br/>
 		<input type = "submit" name = "button" value = "search">
 		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
+     	</div>
      	  <tr>  
      	  	<th></th>
             <th>Idjoueur</th> 
@@ -150,11 +152,13 @@
             <th>NomEquipe</th>    
         </tr>
     	<% if(admin){%>
+    	<div align="center"> 
         <form action = "joueurServlet">
         <input type = "submit" name = "button" value = "delete">
 		<input type = "submit" name = "button" value = "add"> 
         <input type = "submit" name = "button" value = "edit">
         <%} %>
+        </div>
         <%  if(list != null){%>
         <% for(int i = 0;i<list.size();i++){%>
                 <%Joueur joueur = (Joueur)list.get(i);%> 
