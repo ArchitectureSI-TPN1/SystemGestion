@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
+import mypackage.model.Equipe;
 import mypackage.model.Match;
 
 public class MatchDao extends BaseDao{
@@ -154,6 +155,87 @@ public class MatchDao extends BaseDao{
 				e.printStackTrace();
 			}
 		return matchs;
+	}
+	
+	public List<Match> searchMatchsByEquipe(String nomEquipe){
+		List<Match> matchs = new ArrayList<Match>();
+		//matchs = null;
+		EquipeDao equipeDao = new EquipeDao();
+		Equipe equipe = equipeDao.searchEquipe(nomEquipe);
+		//String sql = "select * from matchinfo where Equipe_idEquipe1 = 4 OR Equipe_idEquipe2 = 4;";
+		if (equipe!=null) {
+			String sql = "select * from matchinfo where Equipe_idEquipe1 = " + equipe.getIdEquipe() + "  OR Equipe_idEquipe2 = '" + equipe.getIdEquipe() +"';";
+			ResultSet rs = query(sql); 
+			try {
+				while(rs.next()) {
+					Match match = new Match();
+					match.setIdMatch(rs.getInt("idmatch"));
+					match.setNomMatch(rs.getString("nomMatch"));
+					match.setDate(rs.getDate("date"));
+					match.setVille(rs.getString("ville"));
+					match.setStade(rs.getString("stade"));
+					match.setIdEquipe1(rs.getInt("Equipe_idEquipe1"));
+					match.setIdEquipe2(rs.getInt("Equipe_idEquipe2"));
+					match.setPointEquipe1(rs.getInt("pointEquipe1"));
+					match.setPointEquipe2(rs.getInt("pointEquipe2"));
+					matchs.add(match);
+				}
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		/*sql = "select * from matchinfo where Equipe_idEquipe2 = '" + equipe.getIdEquipe() +"';";
+		rs = query(sql); 
+		try {
+			while(rs.next()) {
+				Match match = new Match();
+				match.setIdMatch(rs.getInt("idmatch"));
+				match.setNomMatch(rs.getString("nomMatch"));
+				match.setDate(rs.getDate("date"));
+				match.setVille(rs.getString("ville"));
+				match.setStade(rs.getString("stade"));
+				match.setIdEquipe1(rs.getInt("Equipe_idEquipe1"));
+				match.setIdEquipe2(rs.getInt("Equipe_idEquipe2"));
+				match.setPointEquipe1(rs.getInt("pointEquipe1"));
+				match.setPointEquipe2(rs.getInt("pointEquipe2"));
+				matchs.add(match);
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}*/
+		return matchs;
+	}
+	public List<String> getNomsEquipesSearch(int m, String nomEquipe){
+		//List<Match> matchs = new ArrayList<Match>();
+		EquipeDao equipeDao = new EquipeDao();
+		Equipe equipe = equipeDao.searchEquipe(nomEquipe);
+		List<String> nomsEquipes = new ArrayList<String>();
+		//String sql = "select * from matchinfo where Equipe_idEquipe1 = 4 OR Equipe_idEquipe2 = 4;";
+		if(equipe!=null) {
+			String sql = "select * from matchinfo where Equipe_idEquipe1 = " + equipe.getIdEquipe() + " OR Equipe_idEquipe2 = " + equipe.getIdEquipe() +";";
+			ResultSet rs = query(sql); 
+			//List<String> nomEquipes = new ArrayList<String>();
+			try {
+				while(rs.next()) {
+					equipeDao = new EquipeDao();
+					nomEquipe = "";
+					if(m==0) {
+						nomEquipe = equipeDao.searchEquipe(rs.getInt("Equipe_idEquipe1")).getNomEquipe();
+
+					}else if(m==1) {
+						nomEquipe = equipeDao.searchEquipe(rs.getInt("Equipe_idEquipe2")).getNomEquipe();
+
+					}
+					//String nomEquipe = searcheEquipeByid(rs.getInt("Equipe_idEquipe")); 
+					nomsEquipes.add(nomEquipe);
+					
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return nomsEquipes;
 	}
 	
 	public List<String> getNomsEquipes(int m) {

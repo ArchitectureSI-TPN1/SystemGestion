@@ -13,7 +13,7 @@
 </head>
 <body>
 <%List list = (List) request.getAttribute("matchs");%>
-<% Match matchInfo = (Match) request.getAttribute("matchInfo");%>
+<% List matchInfo = (List) request.getAttribute("matchsInfo");%>
 <% String message = (String) request.getAttribute("message");%>
 <% String showAdd = (String) request.getAttribute("showAdd");%>
 <% Match matchEdit = (Match) request.getAttribute("matchEdit"); %>
@@ -176,7 +176,7 @@
 	
     <% if(!"showAdd".equals(showAdd) && matchEdit == null) {%>
         <form action = "matchServlet">
-		please enter the name of the match <input type = "text" name = "searchInfo"><br/>
+		please enter the name of the group <input type = "text" name = "searchInfo"><br/>
 		<input type = "submit" name = "button" value = "search">
 		<input type = "submit" name = "button" value = "ListAll">
 		</form>	
@@ -212,7 +212,7 @@
                 <th><%=match.getDate()%></th>  
                 <th><%=match.getVille()%></th>
                 <th><%=match.getStade()%></th>
-                <th><%=listNomEquipes2.get(i)%></th>
+                <th><%=listNomEquipes1.get(i)%></th>
                 <th><%=listNomEquipes2.get(i)%></th>
                 <th><%=match.getPointEquipe1()%></th>
                 <th><%=match.getPointEquipe2()%></th>
@@ -220,24 +220,28 @@
                 
         <% }%> 
         <% }%>
+        
+        <%List NomEquipes1 = (List) request.getAttribute("equipes1");%>
+        <%List NomEquipes2 = (List) request.getAttribute("equipes2");%>
         </form>
         <% if(matchInfo != null){%>
+         <% for(int i = 0;i<matchInfo.size();i++){%>
+                <%Match match = (Match)matchInfo.get(i);%> 
          <tr>  
          		<th>     </th>
-                <th><%=matchInfo.getIdMatch() %></th>   
-                <th><%=matchInfo.getNomMatch()%></th>  
-                <th><%=matchInfo.getDate()%></th>  
-                <th><%=matchInfo.getVille()%></th>
-                <th><%=matchInfo.getStade()%></th>
-                <% Equipe equipe1 = (Equipe) request.getAttribute("equipe1"); %>
-                <% Equipe equipe2 = (Equipe) request.getAttribute("equipe2"); %>           
-                <th><%=equipe1.getNomEquipe()%></th>
-                <th><%=equipe2.getNomEquipe()%></th>  
-                <th><%=matchInfo.getPointEquipe1()%></th>
-                <th><%=matchInfo.getPointEquipe2()%></th>
+                <th><%=match.getIdMatch() %></th>   
+                <th><%=match.getNomMatch()%></th>  
+                <th><%=match.getDate()%></th>  
+                <th><%=match.getVille()%></th>
+                <th><%=match.getStade()%></th>          
+                <th><%=NomEquipes1.get(i)%></th>
+                <th><%=NomEquipes2.get(i)%></th>  
+                <th><%=match.getPointEquipe1()%></th>
+                <th><%=match.getPointEquipe2()%></th>
                 <br> 
                 <% }  
          %>
+          <% }%>
           <% if("delSuccess".equals(message)){%>
          		<script>
 				alert("congratulation! success deleted!");

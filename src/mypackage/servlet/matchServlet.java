@@ -35,11 +35,13 @@ public class matchServlet extends HttpServlet {
 	 */
 	@SuppressWarnings("rawtypes")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nomMatch = request.getParameter("searchInfo");
+		String nomEquipe = request.getParameter("searchInfo");
 		String button = request.getParameter("button");
+		List<Match> matchs = null;
+		//Match match;
 		Match match = null;
-		if(nomMatch != null && "search".equals(button)) {
-			match = searchMatch(nomMatch);
+		if(nomEquipe != null && "search".equals(button)) {
+			/*match = searchMatch(nomMatch);
 			Equipe equipe1 = null;
 			Equipe equipe2 = null;
 			if(match!=null) {
@@ -49,7 +51,16 @@ public class matchServlet extends HttpServlet {
 			//System.out.println(equipe.getIdEquipe());
 			request.setAttribute("equipe1",equipe1 );
 			request.setAttribute("equipe2",equipe2 );
-			request.setAttribute("matchInfo", match);
+			request.setAttribute("matchInfo", match);*/
+			MatchDao matchDao = new MatchDao();
+			matchs = searchMarchByEN(nomEquipe);
+			if(matchs!=null) {
+				List<String> nomsEquipes1 = matchDao.getNomsEquipesSearch(0,nomEquipe);
+				List<String> nomsEquipes2 = matchDao.getNomsEquipesSearch(1,nomEquipe);
+				request.setAttribute("equipes1",nomsEquipes1 );
+				request.setAttribute("equipes2",nomsEquipes2 );
+				request.setAttribute("matchsInfo", matchs);
+			}
 			request.getRequestDispatcher("view/matchView.jsp").forward(request,response);
 		}else if(request.getParameter("chk") != null && "delete".equals(button)) {
 			int delInfo = Integer.parseInt(request.getParameter("chk"));  
@@ -205,7 +216,12 @@ public class matchServlet extends HttpServlet {
 		Equipe equipe = equipeDao.searchEquipe(idEquipe);
 		return equipe;
 	}
-
+	
+	private List<Match> searchMarchByEN(String nomEquipe){
+		MatchDao matchDao = new MatchDao();
+		List<Match> matchs = matchDao.searchMatchsByEquipe(nomEquipe);
+		return matchs;
+	}
 
 
 }
