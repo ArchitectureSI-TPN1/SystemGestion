@@ -122,7 +122,7 @@ public class JoueurDao extends BaseDao{
 		return update(sql);
 	}
 	
-	private String searcheEquipeByid(int paramId) {
+	public String searcheEquipeByid(int paramId) {
 		String sql = "select nomEquipe from equipe where idEquipe = " + paramId;
 		ResultSet rs = query(sql);
 		String nomEquipe = null;
@@ -135,4 +135,19 @@ public class JoueurDao extends BaseDao{
 			}
 		return nomEquipe;
 		}
-}
+	
+	public int searchIdBynom(String paramNom) {
+		String sql = "select idEquipe from equipe where nomEquipe = '"+paramNom+"'";
+		ResultSet rs = query(sql);
+		int idEquipe = 0;
+		try {
+			while(rs.next()) {
+				idEquipe = rs.getInt("idEquipe");
+			}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		return idEquipe;
+		}
+	
+	}

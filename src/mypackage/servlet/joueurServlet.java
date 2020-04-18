@@ -57,7 +57,8 @@ public class joueurServlet extends HttpServlet {
 			int butAdd = Integer.parseInt(request.getParameter("But"));
 			String roleAdd = request.getParameter("Role");
 			Float notePreseAdd = Float.parseFloat(request.getParameter("NotePrese"));
-			int idEquipeAdd = Integer.parseInt(request.getParameter("idEquipe"));
+			String nomEquipeAdd = request.getParameter("idEquipe");
+			int idEquipeAdd = searchIdBynom(nomEquipeAdd);
 			joueur = new Joueur();
 			joueur.setIdjoueur(idJoueurAdd);
 			joueur.setNomJoueur(nomJoueurAdd);
@@ -74,7 +75,9 @@ public class joueurServlet extends HttpServlet {
 				request.getRequestDispatcher("view/wrong.jsp").forward(request,response);
 			}else {
 				Joueur joueurEdit = searchJoueur(Integer.parseInt(edit));
+				String nomEquipeEdit = searchNomById(joueurEdit.getEquipe_idEquipe());
 				request.setAttribute("joueurEdit", joueurEdit);
+				request.setAttribute("nomEquipeEdit", nomEquipeEdit);
 				request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
 			}
 		}else if("submitedit".equals(button)) {
@@ -83,7 +86,8 @@ public class joueurServlet extends HttpServlet {
 			int editBut = Integer.parseInt(request.getParameter("editBut"));
 			String editRole = request.getParameter("editRole");
 			Float editNotePrese = Float.parseFloat(request.getParameter("editNotePrese"));
-			int editIdEquipe = Integer.parseInt(request.getParameter("editIdEquipe"));
+			String editNomEquipe = request.getParameter("editNomEquipe");
+			int editIdEquipe = searchIdBynom(editNomEquipe);
 			joueur = new Joueur();
 			joueur.setIdjoueur(editIdJoueur);
 			joueur.setNomJoueur(editNomjoueur);
@@ -96,10 +100,10 @@ public class joueurServlet extends HttpServlet {
 				request.getRequestDispatcher("SystemServlet?element=joueur").forward(request,response);
 			}
 		}else if("ListAll".equals(button)) {
-			JoueurDao joueurDao = new JoueurDao();
-			List<Joueur> joueurs = joueurDao.getJoueurs();
-			request.setAttribute("joueurs", joueurs);
-			request.getRequestDispatcher("view/joueurView.jsp").forward(request,response);
+			//JoueurDao joueurDao = new JoueurDao();
+			//List<Joueur> joueurs = joueurDao.getJoueurs();
+			//request.setAttribute("joueurs", joueurs);
+			request.getRequestDispatcher("SystemServlet?element=joueur").forward(request,response);
 		}
 	}
 
@@ -136,5 +140,15 @@ public class joueurServlet extends HttpServlet {
 		JoueurDao joueurDao = new JoueurDao();
 		return joueurDao.editJoueur(joueur);
 	}
-
+	
+	private int searchIdBynom(String paramNom) {
+		JoueurDao joueurDao = new JoueurDao();
+		return joueurDao.searchIdBynom(paramNom);
+	}
+	
+	private String searchNomById(int paramId) {
+		JoueurDao joueurDao = new JoueurDao();
+		return joueurDao.searcheEquipeByid(paramId);
+	}
+	
 }

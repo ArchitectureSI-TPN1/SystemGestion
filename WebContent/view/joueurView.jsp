@@ -16,6 +16,7 @@
 <% String showAdd = (String) request.getAttribute("showAdd");%>
 <% HttpServletRequest httpRequest= (HttpServletRequest)request; %>
 <% List listNomEquipes = (List) request.getAttribute("nomEquipes");%>
+<% String nomEquipeEdit = (String) request.getAttribute("nomEquipeEdit");%>
 <% boolean admin = false;
    String login = "";
    String password = "";
@@ -77,7 +78,7 @@
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>idEquipe</td>
+	    			<td>nomEquipe</td>
 	    			<td>
 	    				<input id="add_nbPar" style="width: 200px; height: 30px;" type="text" name="idEquipe"  data-options="required:true, missingMessage:'enter nbParticipation'" />
 	    			</td>
@@ -121,9 +122,9 @@
 	    			</td>
 	    		</tr>
 	    		<tr>
-	    			<td>idEquipe</td>
+	    			<td>nomEquipe</td>
 	    			<td>
-	    				<input id="edit_nbPar" style="width: 200px; height: 30px;" type="text" name="editIdEquipe" value = <%=joueurEdit.getEquipe_idEquipe() %> data-options="required:true, missingMessage:'enter nbParticipation'" />
+	    				<input id="edit_nbPar" style="width: 200px; height: 30px;" type="text" name="editNomEquipe" value = <%=nomEquipeEdit %> data-options="required:true, missingMessage:'enter nbParticipation'" />
 	    			</td>
 	    		</tr>
 	    	</table>
@@ -134,7 +135,7 @@
 	
 	<% if(!"showAdd".equals(showAdd) && joueurEdit == null){%>
 		<form action = "joueurServlet">
-		please enter the name of the group <input type = "text" name = "searchInfo" ><br/>
+		please enter the name of the player <input type = "text" name = "searchInfo" ><br/>
 		<input type = "submit" name = "button" value = "search">
 		<input type = "submit" name = "button" value = "ListAll">
 		</form>	

@@ -24,7 +24,7 @@
 	   for(Cookie ck : cookies){
 		   if("admin".equals(ck.getValue())){
 			   admin = true;
-			   System.out.println(ck.getValue());
+			   
 		   }
 		   if("login".equals(ck.getName())){
 			   login = ck.getValue();
@@ -141,8 +141,7 @@
                 <th><%=equipe.getNomEquipe()%></th>  
                 <th><%=equipe. getNbParticipation()%></th>  
                 <th><%=equipe.getNbVictore()%></th>
-                <th><a href="classementServlet?classement=<%=equipe.getIdEquipe() %>">classement</a></th><br>   
-                
+                <th><a href="classementServlet?classement=<%=equipe.getIdEquipe() %>">classement</a></th><br>          
         <% }%> 
         <% }%>
         </form>
